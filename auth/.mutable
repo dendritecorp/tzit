@@ -1,1 +1,4 @@
-{}
+{
+    "healthCheck": "health",
+    "healthCheckType": "tcp"
+}
