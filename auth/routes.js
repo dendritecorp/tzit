@@ -12,7 +12,7 @@ routes.push({
         tags: ['api'],
         validate: {
             payload: {
-                email: Joi.email().required(),
+                email: Joi.string().email().required(),
                 name: Joi.string().required(),
                 password: Joi.string().required(),
             }
@@ -21,6 +21,30 @@ routes.push({
     }
 });
 
+routes.push({
+    method: 'POST',
+    path:'/api/auth/login',
+    config: {
+        tags: ['api'],
+        validate: {
+            payload: {
+                email: Joi.string().email().required(),
+                password: Joi.string().required(),
+            }
+        },
+        handler: Auth.login
+    }
+});
+
+
+routes.push({
+    method: 'GET',
+    path:'/api/db/check',
+    config: {
+        tags: ['api'],
+        handler: Auth.check
+    }
+});
 
 routes.push({
   method: 'GET',
