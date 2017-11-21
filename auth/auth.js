@@ -1,5 +1,6 @@
 'use strict'
 const Boom = require('boom')
+const Iron = require('iron')
 const crypto = require('crypto')
 const Queries = require ('./auth.sql')
 const Database = require('./db')
@@ -44,9 +45,17 @@ Auth.login = (req, reply) => {
     })
     .then(user => {
       const passwordEncrypted = passwordEncrypt2(password)
-      if(user.password === passwordEncrypted) reply('logged in')
+      if(user.password === passwordEncrypted) return user
       else throw Error('email or password incorrect')
     })
+    .then(user => Object.assign({}, {email: user.email, name: user.name, uuid: user.uuid }))
+    .then(user => {
+      return Iron.seal(user, Database.config.secret, Iron.defaults)
+      .then(session => {
+        return Object.assign({}, {user: user}, {session: session})
+      })
+    })
+    .then(userAndSession => reply(userAndSession.user).state('session', userAndSession.session, { encoding: 'none' }))
     .catch(error => reply(Boom.badRequest(error)))
 }
 
@@ -64,4 +73,13 @@ function passwordEncrypt(password) {
     resolve(hash)
   })
 
+}
+function sealing(data) {
+  return new Promise((resolve, reject) => {
+    Iron.seal(data, Database.config.secret, Iron.defaults, function(err, sealed){
+      console.log(err, sealed)
+      if(err) reject(err)
+      resolve(sealed)
+    })
+  })
 }
