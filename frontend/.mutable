@@ -1,0 +1,5 @@
+{
+    "watch": "*",
+    "healthCheck": "health",
+    "healthCheckType": "http"
+}

@@ -1,0 +1,25 @@
+{
+  "name": "twitter-api",
+  "version": "1.0.0",
+  "main": "auth.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "hapi": "^16.6.2",
+    "hapi-swagger": "^8.0.0",
+    "inert": "^4.2.1",
+    "joi": "^13.0.1",
+    "lsq": "^1.6.1",
+    "md5": "^2.2.1",
+    "pg": "^7.4.0",
+    "request": "^2.83.0",
+    "sha.js": "^2.4.9",
+    "sqlite3": "^3.1.13",
+    "toobusy-js": "^0.5.1",
+    "vision": "^4.1.1"
+  },
+  "description": ""
+}

@@ -1,0 +1,6 @@
+{
+    "healthCheckType": "http",
+    "healthCheck": "health",
+    "watch": "*",
+    "healthCheckInterval": 1000
+}

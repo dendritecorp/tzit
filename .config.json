@@ -1,0 +1,36 @@
+{
+  "services": {
+    "proxy": {
+      "hosts": {
+        "local.twitter.com": {
+          "target": "http://frontend/[~]",
+          "routes": {
+            "api": {
+              "target": "http://backend/[*]"
+            },
+            "auth": {
+              "target": "http://auth/[*]"
+            }
+          }
+        }
+      },
+      "publish": [
+        "frontend",
+        "backend",
+        "auth",
+        "health"
+      ],
+      "page404": "<html><head><style>h1{margin: auto; position: absolute; top: 0; left: 0; right: 0; bottom: 0; height: 100px; font-family: 'arial'; font-weight: 100; color: #555; text-align: center; }body{background:#000;}</style></head><body><h1>404 Not Found</h1></body></html>"
+    },
+    "auth": {
+      "db": {
+        "user": "Holykill",
+        "host": "localhost",
+        "database": "twitter",
+        "password": null,
+        "port": 5432
+      },
+      "secret": "Gj74KY4dGmj0HRYpoqzudYpYC1or63eA7fLDL2tTeqnIejsYUA3N0aVQNT3OiKiC"
+    }
+  }
+}
